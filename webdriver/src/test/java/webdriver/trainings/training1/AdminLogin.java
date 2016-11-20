@@ -1,8 +1,14 @@
 package webdriver.trainings.training1;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -20,7 +26,29 @@ public class AdminLogin {
 
   @BeforeMethod
   public void startBrowser() {
-    driver = new ChromeDriver();
+    DesiredCapabilities caps = new DesiredCapabilities();
+
+    // Chrome
+//    ChromeOptions options = new ChromeOptions();
+//    options.addArguments("start-maximized");
+//    driver = new ChromeDriver(options);
+//    driver = new ChromeDriver();
+
+    // Firefox
+//    старая схема:
+//    caps.setCapability(FirefoxDriver.MARIONETTE, false);
+
+//    новая схема:
+//    driver = new FirefoxDriver();
+
+//    новая схема более явно:
+    caps.setCapability(FirefoxDriver.MARIONETTE, true);
+
+    driver = new FirefoxDriver(caps);
+
+    // Safari
+//    driver = new SafariDriver();
+
     wait = new WebDriverWait(driver, 10);
   }
 
@@ -31,6 +59,7 @@ public class AdminLogin {
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.name("login")).click();
     wait.until(titleIs("My Store"));
+//    System.out.println(((HasCapabilities) driver).getCapabilities());
   }
 
   @AfterMethod
