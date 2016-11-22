@@ -33,36 +33,4 @@ public class ThirdClass extends TestBase{
     driver.findElement(By.name("btnG")).click();
     wait.until(titleIs("webdriver - Пошук Google"));
   }
-
-//  @Test
-  public void test4() {
-    driver.get("http://www.google.com/");
-    driver.findElement(By.name("q")).sendKeys("webdriver");
-    driver.findElement(By.name("btnG")).click();
-    wait.until(titleIs("webdriver - Пошук Google"));
-  }
-
-//  @Test
-  public void test5() {
-    driver.get("http://www.google.com/");
-    driver.findElement(By.name("q")).sendKeys("webdriver");
-    driver.findElement(By.name("btnG")).click();
-    wait.until(titleIs("webdriver - Пошук Google"));
-  }
-
-//  @Test
-  public void test6() {
-    driver.get("http://www.google.com/");
-    driver.findElement(By.name("q")).sendKeys("webdriver");
-    driver.findElement(By.name("btnG")).click();
-    wait.until(titleIs("webdriver - Пошук Google"));
-  }
-
-//  @Test
-  public void test7() {
-    driver.get("http://www.google.com/");
-    driver.findElement(By.name("q")).sendKeys("webdriver");
-    driver.findElement(By.name("btnG")).click();
-    wait.until(titleIs("webdriver - Пошук Google"));
-  }
 }

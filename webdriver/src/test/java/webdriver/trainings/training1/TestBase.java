@@ -19,11 +19,11 @@ public class TestBase {
 
   @Before
   public void start() {
-//    if (tlDriver.get() != null) {
-//      driver = tlDriver.get();
-//      wait = new WebDriverWait(driver, 10);
-//      return;
-//    }
+    if (tlDriver.get() != null) {
+      driver = tlDriver.get();
+      wait = new WebDriverWait(driver, 10);
+      return;
+    }
     DesiredCapabilities caps = new DesiredCapabilities();
     caps.setCapability(FirefoxDriver.MARIONETTE, false);
     driver = new FirefoxDriver(caps);
