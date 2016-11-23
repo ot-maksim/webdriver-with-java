@@ -1,13 +1,13 @@
 package webdriver.trainings.training0;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
@@ -18,7 +18,7 @@ public class FirstTest {
   private WebDriver driver;
   private Wait wait;
 
-  @Before
+  @BeforeMethod
   public void startBrowser() {
     driver = new ChromeDriver();
     wait = new WebDriverWait(driver, 10);
@@ -32,7 +32,7 @@ public class FirstTest {
     wait.until(titleIs("webdriver - Пошук Google"));
   }
 
-  @After
+  @AfterMethod
   public void stopBrowser() {
     driver.quit();
     driver = null;
