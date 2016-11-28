@@ -13,6 +13,7 @@ dependencies {
     testCompile 'org.testng:testng:6.9.13.6'
 //    testCompile 'junit:junit:4.12'
     testCompile 'org.seleniumhq.selenium:selenium-java:3.0.1'
+    compile 'org.hamcrest:java-hamcrest:2.0.0.0'
 }
 
 test {
