@@ -2,19 +2,12 @@ package webdriver.trainings.homeworks;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import soft.hamcrestassert.SoftHamcrestAssert;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
 /**
  * Created by maksym on 11/23/16.
@@ -25,7 +18,7 @@ public class HomeWork10 extends TestBase {
   public void checkProductStyle() {
 
     // NOTE: style assertions are valid only for Chrome (they were not adopted to other browsers)
-    
+
     SoftHamcrestAssert softAssert = new SoftHamcrestAssert();
     driver.get("http://localhost/litecart-1.3.6");
     List<WebElement> campaignsProducts = driver.findElements(By.cssSelector("#box-campaigns ul li"));
