@@ -24,11 +24,11 @@ public class HomeWork9 extends TestBase {
 
   @BeforeMethod
   public void login() {
-    driver.get("http://localhost/litecart-1.3.6/admin/");
+    goTo("http://localhost/litecart-1.3.6/admin/");
     if (driver.findElements(By.cssSelector("#sidebar .header")).size() == 0) {
-      driver.findElement(By.cssSelector("[name=username]")).sendKeys("admin");
-      driver.findElement(By.cssSelector("[name=password]")).sendKeys("admin");
-      driver.findElement(By.cssSelector("[name=login]")).click();
+      typeText(By.cssSelector("[name=username]"), "admin");
+      typeText(By.cssSelector("[name=password]"), "admin");
+      click(By.cssSelector("[name=login]"));
     }
   }
 
@@ -36,8 +36,8 @@ public class HomeWork9 extends TestBase {
   public void checkCountriesSortingOrder() {
 
     ArrayList<String> countries = new ArrayList<>();
+    goTo("http://localhost/litecart-1.3.6/admin/?app=countries&doc=countries");
 
-    driver.get("http://localhost/litecart-1.3.6/admin/?app=countries&doc=countries");
     List<WebElement> countryRows = driver.findElements(By.cssSelector("#content tr.row"));
 
     for (WebElement countryRow : countryRows) {
@@ -57,7 +57,7 @@ public class HomeWork9 extends TestBase {
     List<WebElement> allCountryZoneRows;
     List<String> countryZoneNames = new ArrayList<>();
 
-    driver.get("http://localhost/litecart-1.3.6/admin/?app=countries&doc=countries");
+    goTo("http://localhost/litecart-1.3.6/admin/?app=countries&doc=countries");
 
     int countryQuantity = driver.findElements(By.xpath("//*[@id='content']//tr[contains(@class,'row')]")).size();
 
@@ -98,7 +98,7 @@ public class HomeWork9 extends TestBase {
   @Test
   public void checkCountryGeoZonesSortingOrder() {
     SoftHamcrestAssert softAssert = new SoftHamcrestAssert();
-    driver.get("http://localhost/litecart-1.3.6/admin/?app=geo_zones&doc=geo_zones");
+    goTo("http://localhost/litecart-1.3.6/admin/?app=geo_zones&doc=geo_zones");
 
     List<WebElement> countryRows = driver.findElements(By.cssSelector("#content form[name=geo_zones_form] tr.row"));
     List<WebElement> zoneRows;
@@ -123,7 +123,6 @@ public class HomeWork9 extends TestBase {
       }
       List<String> zonesSortedInAscOrder = zoneNames.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
       softAssert.assertThat("Sorting should be in ascending order", Objects.equals(zonesSortedInAscOrder, zoneNames), is(true));
-      System.out.println(zoneNames);
       driver.navigate().back();
       zoneNames = new ArrayList<>();
     }

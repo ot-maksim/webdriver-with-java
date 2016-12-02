@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
 /**
  * Created by maksym on 11/23/16.
@@ -15,10 +14,9 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 public class HomeWork8 extends TestBase{
 
   @Test
-  public void checkStickersForAllProductsOnMainPage() throws InterruptedException {
+  public void checkStickersForAllProductsOnMainPage() {
     String stickerSelector = "div[class^=sticker]";
-
-    driver.get("http://localhost/litecart-1.3.6/");
+    goTo("http://localhost/litecart-1.3.6/");
 
     List<WebElement> mostPopularProducts = driver.findElements(By.cssSelector("#box-most-popular ul li"));
     for (WebElement mostPopularProduct : mostPopularProducts) {
