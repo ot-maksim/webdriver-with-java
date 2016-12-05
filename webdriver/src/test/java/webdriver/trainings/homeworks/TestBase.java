@@ -5,8 +5,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -59,12 +57,12 @@ public class TestBase {
     sendKeys(locator, text);
   }
 
-  protected void click(By selector) {
-    driver.findElement(selector).click();
+  protected void click(By locator) {
+    driver.findElement(locator).click();
   }
 
-  protected void click(By selector, int index) {
-    driver.findElements(selector).get(index).click();
+  protected void click(By locator, int index) {
+    driver.findElements(locator).get(index).click();
   }
 
   protected void loginAsUser(By loginFieldLocator, By passwordFieldLocator, By loginButtonLocator, User user) {
@@ -89,28 +87,28 @@ public class TestBase {
     click(locator);
   }
 
-  protected void attachImage(String pathToImage, By selector) {
+  protected void attachImage(By locator, String pathToImage) {
     String duckHorror = Paths.get(pathToImage).toAbsolutePath().toString();
-    driver.findElement(selector).sendKeys(duckHorror);
+    driver.findElement(locator).sendKeys(duckHorror);
   }
 
-  protected void selectItemByIndex(By selector, int index) {
-    WebElement dropBoxElement = driver.findElement(selector);
+  protected void selectItemByIndex(By locator, int index) {
+    WebElement dropBoxElement = driver.findElement(locator);
     Select select = new Select(dropBoxElement);
     if (select.getOptions().size() > 1) {
       select.selectByIndex(index);
     }
   }
 
-  protected void selectCheckBox(By selector) {
-    WebElement checkBox = driver.findElement(selector);
+  protected void selectCheckBox(By locator) {
+    WebElement checkBox = driver.findElement(locator);
     if (checkBox.getAttribute("checked") == null) {
       checkBox.click();
     }
   }
 
-  protected void selectCheckBox(By selector, int index) {
-    WebElement checkBox = driver.findElements(selector).get(index);
+  protected void selectCheckBox(By locator, int index) {
+    WebElement checkBox = driver.findElements(locator).get(index);
     if (checkBox.getAttribute("checked") == null) {
       checkBox.click();
     }

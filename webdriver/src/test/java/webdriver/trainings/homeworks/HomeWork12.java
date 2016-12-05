@@ -41,7 +41,7 @@ public class HomeWork12 extends TestBase {
     selectItemByIndex(By.cssSelector("#tab-general [name=delivery_status_id"), 1);
     selectItemByIndex(By.cssSelector("#tab-general [name=sold_out_status_id"), 1);
 
-    attachImage("src/test/resources/duck_horror.jpeg", By.cssSelector("#tab-general [name=new_images\\[\\]"));
+    attachImage(By.cssSelector("#tab-general [name=new_images\\[\\]"), "src/test/resources/duck_horror.jpeg");
 
     typeText(By.cssSelector("#tab-general [name=date_valid_from"), "Keys.ARROW_LEFT, Keys.ARROW_LEFT, \"10122016\"");
     typeText(By.cssSelector("#tab-general [name=date_valid_to"), "Keys.ARROW_LEFT, Keys.ARROW_LEFT, \"10122017\"");
