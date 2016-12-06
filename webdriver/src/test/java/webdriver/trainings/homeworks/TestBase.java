@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,6 +13,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.nio.file.Paths;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by maksym on 11/23/16.
@@ -19,11 +22,15 @@ import java.nio.file.Paths;
 public class TestBase {
   protected WebDriver driver;
   protected Wait wait;
+  protected Wait fluentWait;
 
   @BeforeClass
-  public void startBrwoser() {
+  public void startBrowser() {
     driver = new ChromeDriver();
     wait = new WebDriverWait(driver, 10);
+    fluentWait = new FluentWait<>(driver)
+            .withTimeout(10, TimeUnit.MILLISECONDS)
+            .ignoring(NoSuchElementException.class);
   }
 
   @AfterClass
