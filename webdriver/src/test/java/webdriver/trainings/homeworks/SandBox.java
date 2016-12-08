@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -29,10 +30,13 @@ public class SandBox extends TestBase {
     fluentWait.until(numberOfElementsToBeByAnonimous(By.cssSelector("#app-"), 17));
     fluentWait.until(numberOfElementsToBeByLambda(By.cssSelector("#app-"), 17));
 
-    WebElement element1 = wait.until((WebDriver d) -> d.findElement(By.cssSelector("#sidebar")));
+//    wait.until((WebDriver d) -> d.findElement(By.cssSelector("#sidebar")));
+
+//    wait.until((WebDriver d) -> d.findElement(By.cssSelector("#sidebar")));
+
     WebElement element11 = new WebDriverWait(driver, 10).until((WebDriver d) -> d.findElement(By.cssSelector("#sidebar")));
 
-    WebElement element2 = fluentWait.until((WebDriver d) -> d.findElement(By.cssSelector("#sidebar")));
+//    WebElement element2 = fluentWait.until((WebDriver d) -> d.findElement(By.cssSelector("#sidebar")));
     WebElement element22 = new FluentWait<>(driver).withTimeout(10, TimeUnit.MILLISECONDS).until((WebDriver d) -> d.findElement(By.cssSelector("#sidebar")));
 
     List<WebElement> list1 = new WebDriverWait(driver, 10).until(numberOfElementsToBeByAnonimous(By.cssSelector("#app-"), 17));

@@ -1,9 +1,7 @@
 package webdriver.trainings.homeworks;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.base.Function;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -23,6 +21,10 @@ public class TestBase {
   protected WebDriver driver;
   protected Wait wait;
   protected Wait fluentWait;
+
+  public static Function<WebDriver, Boolean> isQuantityChanged(final By locator, final Integer quantity) {
+    return (WebDriver webDriver) -> Integer.parseInt(webDriver.findElement(locator).getText()) == (quantity);
+  }
 
   @BeforeClass
   public void startBrowser() {
@@ -118,6 +120,15 @@ public class TestBase {
     WebElement checkBox = driver.findElements(locator).get(index);
     if (checkBox.getAttribute("checked") == null) {
       checkBox.click();
+    }
+  }
+
+  protected boolean isElementPresent(By locator) {
+    try {
+      driver.findElement(locator);
+      return true;
+    } catch (WebDriverException ex) {
+      return false;
     }
   }
 }
