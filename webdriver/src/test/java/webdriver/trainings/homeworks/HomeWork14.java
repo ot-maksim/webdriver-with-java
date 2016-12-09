@@ -1,17 +1,15 @@
 package webdriver.trainings.homeworks;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import soft.hamcrestassert.SoftHamcrestAssert;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.stalenessOf;
-import static org.testng.Assert.assertTrue;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 /**
  * Created by maksym on 11/23/16.
@@ -33,6 +31,9 @@ public class HomeWork14 extends TestBase {
     String windowHandleNew;
     Set<String> windowHandlesOld;
     List<String> titles = new ArrayList<>();
+    String oldTitle = driver.getTitle();
+    String newTitle;
+    SoftHamcrestAssert softAssert = new SoftHamcrestAssert();
 
     for(int i = 0; i < extLinksNumber; i++) {
       windowHandleOld = driver.getWindowHandle();
@@ -40,11 +41,15 @@ public class HomeWork14 extends TestBase {
       click(By.cssSelector(".fa-external-link"), i);
       windowHandleNew = String.valueOf(wait.until(anyWindowOtherThan(windowHandlesOld)));
       driver.switchTo().window(windowHandleNew);
-      titles.add(driver.getTitle());
+      newTitle = driver.getTitle();
+      titles.add(newTitle);
+      softAssert.assertThat(newTitle, is(not(oldTitle)));
       driver.close();
       driver.switchTo().window(windowHandleOld);
     }
 
-    assertTrue(extLinksNumber == titles.size());
+    softAssert.assertThat(extLinksNumber, is(titles.size()));
+
+    softAssert.assertAll();
   }
 }
