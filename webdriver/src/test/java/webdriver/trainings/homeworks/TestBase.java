@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeClass;
 
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,10 +22,6 @@ public class TestBase {
   protected WebDriver driver;
   protected Wait wait;
   protected Wait fluentWait;
-
-  public static Function<WebDriver, Boolean> isQuantityChanged(final By locator, final Integer quantity) {
-    return (WebDriver webDriver) -> Integer.parseInt(webDriver.findElement(locator).getText()) == (quantity);
-  }
 
   @BeforeClass
   public void startBrowser() {
@@ -130,5 +127,16 @@ public class TestBase {
     } catch (WebDriverException ex) {
       return false;
     }
+  }
+
+  public static Function<WebDriver, Boolean> isQuantityChanged(final By locator, final Integer quantity) {
+    return (WebDriver webDriver) -> Integer.parseInt(webDriver.findElement(locator).getText()) == (quantity);
+  }
+
+  public static Function<WebDriver, String> anyWindowOtherThan(final Set<String> oldWindowHandles) {
+    return (WebDriver webDriver) -> {
+      Set<String> currentWindowHandles = webDriver.getWindowHandles();
+      currentWindowHandles.removeAll(oldWindowHandles);
+      return currentWindowHandles.size() > 0 ? currentWindowHandles.iterator().next() : null;};
   }
 }
