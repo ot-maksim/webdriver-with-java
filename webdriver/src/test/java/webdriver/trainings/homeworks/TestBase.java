@@ -2,7 +2,10 @@ package webdriver.trainings.homeworks;
 
 import com.google.common.base.Function;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
@@ -10,6 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -23,9 +28,64 @@ public class TestBase {
   protected Wait wait;
   protected Wait fluentWait;
 
+  public static final String USERNAME = "maksim109";
+  public static final String AUTOMATE_KEY = "dUzpyKw6Fx98MeaH7NH8";
+  public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
+
   @BeforeClass
-  public void startBrowser() {
-    driver = new ChromeDriver();
+  public void startBrowser() throws MalformedURLException {
+
+    // Windows
+    DesiredCapabilities ieWin = new DesiredCapabilities();
+    ieWin.setBrowserName(BrowserType.IE);
+    ieWin.setPlatform(Platform.WINDOWS);
+
+    DesiredCapabilities chromeWin = new DesiredCapabilities();
+    chromeWin.setBrowserName(BrowserType.CHROME);
+    chromeWin.setPlatform(Platform.WINDOWS);
+
+    DesiredCapabilities foxWin = new DesiredCapabilities();
+    foxWin.setCapability(FirefoxDriver.MARIONETTE, false);
+    foxWin.setBrowserName(BrowserType.FIREFOX);
+    foxWin.setPlatform(Platform.WINDOWS);
+
+    //Mac
+    DesiredCapabilities chromeMac = new DesiredCapabilities();
+    chromeMac.setBrowserName(BrowserType.CHROME);
+    chromeMac.setPlatform(Platform.MAC);
+
+    DesiredCapabilities foxMac = new DesiredCapabilities();
+    foxMac.setCapability(FirefoxDriver.MARIONETTE, false);
+    foxMac.setBrowserName(BrowserType.FIREFOX);
+    foxMac.setPlatform(Platform.MAC);
+
+    DesiredCapabilities safariMac = new DesiredCapabilities();
+    safariMac.setBrowserName(BrowserType.SAFARI);
+    safariMac.setPlatform(Platform.MAC);
+
+    //Linux
+    DesiredCapabilities chromeLinux = new DesiredCapabilities();
+    chromeLinux.setBrowserName(BrowserType.CHROME);
+    chromeLinux.setPlatform(Platform.LINUX);
+
+    DesiredCapabilities foxLinux = new DesiredCapabilities();
+    foxLinux.setCapability(FirefoxDriver.MARIONETTE, false);
+    foxLinux.setBrowserName(BrowserType.FIREFOX);
+    foxLinux.setPlatform(Platform.LINUX);
+
+    // browserstack.com caps
+    DesiredCapabilities caps = new DesiredCapabilities();
+    caps.setCapability("browser", "IE");
+    caps.setCapability("browser_version", "7.0");
+    caps.setCapability("os", "Windows");
+    caps.setCapability("os_version", "XP");
+    caps.setCapability("browserstack.debug", "true");
+    caps.setCapability("browserstack.local", "true");
+    driver = new RemoteWebDriver(new URL(URL), caps);
+
+//    driver = new RemoteWebDriver(new URL("http://192.168.1.47:4444/wd/hub"), chromeLinux);
+
+    System.out.println(((HasCapabilities)driver).getCapabilities());
     wait = new WebDriverWait(driver, 10);
     fluentWait = new FluentWait<>(driver)
             .withTimeout(10, TimeUnit.MILLISECONDS)
