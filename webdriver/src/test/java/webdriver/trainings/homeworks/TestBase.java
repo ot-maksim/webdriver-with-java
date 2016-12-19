@@ -1,10 +1,14 @@
 package webdriver.trainings.homeworks;
 
 import com.google.common.base.Function;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -28,6 +32,8 @@ public class TestBase {
   protected WebDriver driver;
   protected Wait wait;
   protected Wait fluentWait;
+  protected BrowserMobProxy proxy;
+//  protected Proxy proxy;
 
   public static final String USERNAME = "maksim109";
   public static final String AUTOMATE_KEY = "dUzpyKw6Fx98MeaH7NH8";
@@ -86,8 +92,19 @@ public class TestBase {
 
 //    driver = new RemoteWebDriver(new URL("http://192.168.1.47:4444/wd/hub"), chromeLinux);
 
-    //Local
-    driver = new ChromeDriver();
+//    driver run through proxy
+//    proxy = new Proxy();
+//    proxy.setHttpProxy("localhost:8080");
+    proxy = new BrowserMobProxyServer();
+    proxy.start(8080);
+    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+    DesiredCapabilities capsBMP = new DesiredCapabilities();
+    capsBMP.setCapability(CapabilityType.PROXY, seleniumProxy);
+//    capsBMP.setCapability("proxy", proxy);
+
+    driver = new ChromeDriver(capsBMP);
+//    Local
+//    driver = new ChromeDriver();
 
 //    System.out.println(((HasCapabilities)driver).getCapabilities());
     wait = new WebDriverWait(driver, 10);
@@ -100,6 +117,7 @@ public class TestBase {
   public void stopBrowser() {
     driver.quit();
     driver = null;
+    proxy.stop();
   }
 
   protected boolean isFieldOrTextAreaEmpty(By locator) {
@@ -201,6 +219,7 @@ public class TestBase {
     return (WebDriver webDriver) -> {
       Set<String> currentWindowHandles = webDriver.getWindowHandles();
       currentWindowHandles.removeAll(oldWindowHandles);
-      return currentWindowHandles.size() > 0 ? currentWindowHandles.iterator().next() : null;};
+      return currentWindowHandles.size() > 0 ? currentWindowHandles.iterator().next() : null;
+    };
   }
 }
