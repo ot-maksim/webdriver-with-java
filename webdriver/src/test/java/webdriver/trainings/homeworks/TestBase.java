@@ -32,7 +32,7 @@ public class TestBase {
   protected WebDriver driver;
   protected Wait wait;
   protected Wait fluentWait;
-  protected BrowserMobProxy proxy;
+//  protected BrowserMobProxy proxy;
 //  protected Proxy proxy;
 
   public static final String USERNAME = "maksim109";
@@ -93,18 +93,21 @@ public class TestBase {
 //    driver = new RemoteWebDriver(new URL("http://192.168.1.47:4444/wd/hub"), chromeLinux);
 
 //    driver run through proxy
+    DesiredCapabilities capsBMP = new DesiredCapabilities();
+
 //    proxy = new Proxy();
 //    proxy.setHttpProxy("localhost:8080");
-    proxy = new BrowserMobProxyServer();
-    proxy.start(8080);
-    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
-    DesiredCapabilities capsBMP = new DesiredCapabilities();
-    capsBMP.setCapability(CapabilityType.PROXY, seleniumProxy);
 //    capsBMP.setCapability("proxy", proxy);
 
-    driver = new ChromeDriver(capsBMP);
+//    proxy = new BrowserMobProxyServer();
+//    proxy.start(8080);
+//    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+//    capsBMP.setCapability(CapabilityType.PROXY, seleniumProxy);
+//
+//    driver = new ChromeDriver(capsBMP);
+
 //    Local
-//    driver = new ChromeDriver();
+    driver = new ChromeDriver();
 
 //    System.out.println(((HasCapabilities)driver).getCapabilities());
     wait = new WebDriverWait(driver, 10);
@@ -117,7 +120,7 @@ public class TestBase {
   public void stopBrowser() {
     driver.quit();
     driver = null;
-    proxy.stop();
+//    proxy.stop();
   }
 
   protected boolean isFieldOrTextAreaEmpty(By locator) {
