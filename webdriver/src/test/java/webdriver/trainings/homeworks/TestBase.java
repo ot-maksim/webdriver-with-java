@@ -2,6 +2,7 @@ package webdriver.trainings.homeworks;
 
 import com.google.common.base.Function;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -81,11 +82,14 @@ public class TestBase {
     caps.setCapability("os_version", "XP");
     caps.setCapability("browserstack.debug", "true");
     caps.setCapability("browserstack.local", "true");
-    driver = new RemoteWebDriver(new URL(URL), caps);
+//    driver = new RemoteWebDriver(new URL(URL), caps);
 
 //    driver = new RemoteWebDriver(new URL("http://192.168.1.47:4444/wd/hub"), chromeLinux);
 
-    System.out.println(((HasCapabilities)driver).getCapabilities());
+    //Local
+    driver = new ChromeDriver();
+
+//    System.out.println(((HasCapabilities)driver).getCapabilities());
     wait = new WebDriverWait(driver, 10);
     fluentWait = new FluentWait<>(driver)
             .withTimeout(10, TimeUnit.MILLISECONDS)
