@@ -1,7 +1,6 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 /**
@@ -23,6 +22,6 @@ public class HomeWork15_16 extends TestBase {
 //    element.sendKeys("BrowserStack");
 //    element.submit();
 
-    System.out.println(driver.getTitle());
+    System.out.println(app.getDriver().getTitle());
   }
 }

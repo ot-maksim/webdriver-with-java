@@ -1,4 +1,4 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -26,26 +26,26 @@ public class HomeWork14 extends TestBase {
     goTo("http://localhost/litecart-1.3.6/admin/?app=countries&doc=countries");
     click(By.cssSelector("#content a.button"));
 
-    int extLinksNumber = driver.findElements(By.cssSelector(".fa-external-link")).size();
+    int extLinksNumber = app.getDriver().findElements(By.cssSelector(".fa-external-link")).size();
     String windowHandleOld;
     String windowHandleNew;
     Set<String> windowHandlesOld;
     List<String> titles = new ArrayList<>();
-    String oldTitle = driver.getTitle();
+    String oldTitle = app.getDriver().getTitle();
     String newTitle;
     SoftHamcrestAssert softAssert = new SoftHamcrestAssert();
 
     for(int i = 0; i < extLinksNumber; i++) {
-      windowHandleOld = driver.getWindowHandle();
-      windowHandlesOld = driver.getWindowHandles();
+      windowHandleOld = app.getDriver().getWindowHandle();
+      windowHandlesOld = app.getDriver().getWindowHandles();
       click(By.cssSelector(".fa-external-link"), i);
-      windowHandleNew = String.valueOf(wait.until(anyWindowOtherThan(windowHandlesOld)));
-      driver.switchTo().window(windowHandleNew);
-      newTitle = driver.getTitle();
+      windowHandleNew = String.valueOf(app.getWait().until(anyWindowOtherThan(windowHandlesOld)));
+      app.getDriver().switchTo().window(windowHandleNew);
+      newTitle = app.getDriver().getTitle();
       titles.add(newTitle);
       softAssert.assertThat(newTitle, is(not(oldTitle)));
-      driver.close();
-      driver.switchTo().window(windowHandleOld);
+      app.getDriver().close();
+      app.getDriver().switchTo().window(windowHandleOld);
     }
 
     softAssert.assertThat(extLinksNumber, is(titles.size()));

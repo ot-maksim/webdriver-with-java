@@ -1,4 +1,4 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
@@ -20,7 +20,7 @@ public class HomeWork12 extends TestBase {
     typeText(By.cssSelector("[name=password]"), "admin");
     click(By.cssSelector("[name=login]"));
 
-    wait.until(presenceOfElementLocated(By.cssSelector("#sidebar")));
+    app.getWait().until(presenceOfElementLocated(By.cssSelector("#sidebar")));
 
     click(By.cssSelector("#app-"), 1);
     click(By.cssSelector("#doc-catalog a"));

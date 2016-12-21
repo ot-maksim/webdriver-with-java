@@ -1,4 +1,4 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.logging.LogEntry;
@@ -27,15 +27,15 @@ public class HomeWork17 extends TestBase {
     List<LogEntry> productPage = new ArrayList<>();
     goTo("http://localhost/litecart-1.3.6/admin/?app=catalog&doc=catalog&category_id=1");
 
-    int products = driver.findElements(By.cssSelector("img + [href*='&product_id=']")).size();
+    int products = app.getDriver().findElements(By.cssSelector("img + [href*='&product_id=']")).size();
 
     for (int i = 0; i < products; i++) {
       click(By.cssSelector("img + [href*='&product_id=']"), i);
-      for (LogEntry l : driver.manage().logs().get("browser").getAll()) {
+      for (LogEntry l : app.getDriver().manage().logs().get("browser").getAll()) {
         productPage.add(l);
       }
-      softAssert.assertThat("There are some issues in browser logs on page with title - " + driver.getTitle(), productPage.size(), equalTo(0));
-      driver.navigate().back();
+      softAssert.assertThat("There are some issues in browser logs on page with title - " + app.getDriver().getTitle(), productPage.size(), equalTo(0));
+      app.getDriver().navigate().back();
     }
     softAssert.assertAll();
   }

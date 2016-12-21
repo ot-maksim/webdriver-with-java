@@ -1,7 +1,8 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import webdriver.trainings.homeworks.model.User;
 
 
 /**
@@ -39,7 +40,7 @@ public class HomeWork11 extends TestBase {
             .lastName("lastname")
             .address1("address1")
             .address2("address2")
-            .postCode(12345)
+            .postCode("12345")
             .city("city")
             .email("email-" + System.currentTimeMillis() + "@litecart.com")
             .phone("+380777777777")

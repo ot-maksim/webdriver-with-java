@@ -1,4 +1,4 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.testng.annotations.Test;
 

@@ -1,4 +1,4 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 /**
  * Created by maksym on 11/23/16.
  */
-public class HomeWork7 extends TestBase{
+public class HomeWork7 extends TestBase {
 
   @Test
   public void iterateOverAllMenuItems() {
@@ -20,18 +20,18 @@ public class HomeWork7 extends TestBase{
     typeText(By.cssSelector("[name=password]"), "admin");
     click(By.cssSelector("[name=login]"));
 
-    List<WebElement> elements = driver.findElements(By.cssSelector("#app-"));
+    List<WebElement> elements = app.getDriver().findElements(By.cssSelector("#app-"));
 
     for (int i = 1; i <= elements.size(); i++) {
       click(By.cssSelector("#app-:nth-of-type(" + i + ")"));
-      if (driver.findElements(By.cssSelector("ul.docs")).size() > 0) {
-        int subMenuItems = driver.findElements(By.cssSelector("ul.docs li")).size();
+      if (app.getDriver().findElements(By.cssSelector("ul.docs")).size() > 0) {
+        int subMenuItems = app.getDriver().findElements(By.cssSelector("ul.docs li")).size();
         for (int j = 1; j <= subMenuItems; j++) {
           click(By.cssSelector("ul.docs li:nth-of-type(" + j + ")"));
-          wait.until(titleIs(driver.getTitle()));
+          app.getWait().until(titleIs(app.getDriver().getTitle()));
         }
       } else {
-        wait.until(titleIs(driver.getTitle()));
+        app.getWait().until(titleIs(app.getDriver().getTitle()));
       }
     }
   }

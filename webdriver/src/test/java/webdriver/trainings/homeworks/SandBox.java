@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+import webdriver.trainings.homeworks.tests.TestBase;
 
 import java.util.List;
 import java.util.Set;
@@ -43,21 +44,21 @@ public class SandBox extends TestBase {
 //    System.out.println("list1 " + list1.size());
 //    System.out.println("list2 " + list2.size());
 
-    System.out.println("start");
-
-    driver.manage().window().maximize();
-    String windowHandleOld = driver.getWindowHandle();
-    Set<String> windowHandlesOld = driver.getWindowHandles();
-    ((JavascriptExecutor)driver).executeScript("window.open()");
-    String windowHandleNew = String.valueOf(wait.until(anyWindowOtherThan(windowHandlesOld)));
-    driver.switchTo().window(windowHandleNew);
-    driver.get("http://ukr.net");
-    driver.switchTo().window(windowHandleOld);
-    driver.get("http://meta.ua");
-    driver.switchTo().window(windowHandleNew);
-    driver.close();
-    driver.switchTo().window(windowHandleOld);
-    driver.get("http://localhost/litecart-1.3.6/admin/login.php");
+//    System.out.println("start");
+//
+//    driver.manage().window().maximize();
+//    String windowHandleOld = driver.getWindowHandle();
+//    Set<String> windowHandlesOld = driver.getWindowHandles();
+//    ((JavascriptExecutor)driver).executeScript("window.open()");
+//    String windowHandleNew = String.valueOf(wait.until(anyWindowOtherThan(windowHandlesOld)));
+//    driver.switchTo().window(windowHandleNew);
+//    driver.get("http://ukr.net");
+//    driver.switchTo().window(windowHandleOld);
+//    driver.get("http://meta.ua");
+//    driver.switchTo().window(windowHandleNew);
+//    driver.close();
+//    driver.switchTo().window(windowHandleOld);
+//    driver.get("http://localhost/litecart-1.3.6/admin/login.php");
 
 
 

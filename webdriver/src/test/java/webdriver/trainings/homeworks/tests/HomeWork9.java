@@ -1,9 +1,10 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import soft.hamcrestassert.SoftHamcrestAssert;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,8 +16,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
-import soft.hamcrestassert.SoftHamcrestAssert;
-
 /**
  * Created by maksym on 11/23/16.
  */
@@ -25,7 +24,7 @@ public class HomeWork9 extends TestBase {
   @BeforeMethod
   public void login() {
     goTo("http://localhost/litecart-1.3.6/admin/");
-    if (driver.findElements(By.cssSelector("#sidebar .header")).size() == 0) {
+    if (app.getDriver().findElements(By.cssSelector("#sidebar .header")).size() == 0) {
       typeText(By.cssSelector("[name=username]"), "admin");
       typeText(By.cssSelector("[name=password]"), "admin");
       click(By.cssSelector("[name=login]"));
@@ -38,7 +37,7 @@ public class HomeWork9 extends TestBase {
     ArrayList<String> countries = new ArrayList<>();
     goTo("http://localhost/litecart-1.3.6/admin/?app=countries&doc=countries");
 
-    List<WebElement> countryRows = driver.findElements(By.cssSelector("#content tr.row"));
+    List<WebElement> countryRows = app.getDriver().findElements(By.cssSelector("#content tr.row"));
 
     for (WebElement countryRow : countryRows) {
       WebElement nameColumn = countryRow.findElements(By.cssSelector("td")).get(4);
@@ -59,14 +58,14 @@ public class HomeWork9 extends TestBase {
 
     goTo("http://localhost/litecart-1.3.6/admin/?app=countries&doc=countries");
 
-    int countryQuantity = driver.findElements(By.xpath("//*[@id='content']//tr[contains(@class,'row')]")).size();
+    int countryQuantity = app.getDriver().findElements(By.xpath("//*[@id='content']//tr[contains(@class,'row')]")).size();
 
     WebElement countryRow;
     List<WebElement> countryRowColumns;
     WebElement countryNameColumn;
 
     for (int i = 1; i <= countryQuantity; i++) {
-      countryRow = driver.findElement(By.xpath("//*[@id='content']//tr[contains(@class,'row')][" + i + "]"));
+      countryRow = app.getDriver().findElement(By.xpath("//*[@id='content']//tr[contains(@class,'row')][" + i + "]"));
       countryRowColumns = countryRow.findElements(By.cssSelector("td"));
       countryZonesNumber = Integer.parseInt(countryRowColumns.get(5).getText());
 
@@ -75,9 +74,9 @@ public class HomeWork9 extends TestBase {
         countryNameColumn = countryRowColumns.get(4);
         countryNameColumn.findElement(By.cssSelector("a")).click();
 
-        wait.until(titleIs("Edit Country | My Store"));
+        app.getWait().until(titleIs("Edit Country | My Store"));
 
-        allCountryZoneRows = driver.findElements(By.xpath("//*[@id='table-zones']//tr/td[1]/input/../.."));
+        allCountryZoneRows = app.getDriver().findElements(By.xpath("//*[@id='table-zones']//tr/td[1]/input/../.."));
 
         for (WebElement allCountryZoneRow : allCountryZoneRows) {
           List<WebElement> allColumnsFromRow = allCountryZoneRow.findElements(By.cssSelector("td"));
@@ -88,7 +87,7 @@ public class HomeWork9 extends TestBase {
         softAssert.assertThat("Sorting should be in ascending order", Objects.equals(countryZonesSortedInAscOrder, countryZoneNames), is(true));
 
         countryZoneNames = new ArrayList<>();
-        driver.navigate().back();
+        app.getDriver().navigate().back();
       }
     }
 
@@ -100,7 +99,7 @@ public class HomeWork9 extends TestBase {
     SoftHamcrestAssert softAssert = new SoftHamcrestAssert();
     goTo("http://localhost/litecart-1.3.6/admin/?app=geo_zones&doc=geo_zones");
 
-    List<WebElement> countryRows = driver.findElements(By.cssSelector("#content form[name=geo_zones_form] tr.row"));
+    List<WebElement> countryRows = app.getDriver().findElements(By.cssSelector("#content form[name=geo_zones_form] tr.row"));
     List<WebElement> zoneRows;
     WebElement countryRow;
     WebElement countryNameColumn;
@@ -110,11 +109,11 @@ public class HomeWork9 extends TestBase {
 
 
     for (int i = 1; i <= countryRows.size(); i++) {
-      countryRow = driver.findElement(By.xpath("//*[@id='content']//form[@name='geo_zones_form']//tr[contains(@class,'row')][" + i + "]"));
+      countryRow = app.getDriver().findElement(By.xpath("//*[@id='content']//form[@name='geo_zones_form']//tr[contains(@class,'row')][" + i + "]"));
       countryNameColumn = countryRow.findElements(By.cssSelector("td")).get(2);
       countryNameColumn.findElement(By.cssSelector("a")).click();
-      wait.until(titleIs("Edit Geo Zone | My Store"));
-      zoneRows = driver.findElements((By.xpath("//*[@id='table-zones']//tr/td[1]/input/../..")));
+      app.getWait().until(titleIs("Edit Geo Zone | My Store"));
+      zoneRows = app.getDriver().findElements((By.xpath("//*[@id='table-zones']//tr/td[1]/input/../..")));
       for (WebElement zoneRow : zoneRows) {
         zoneRowColumns = zoneRow.findElements(By.cssSelector("td"));
         zoneNameColum = zoneRowColumns.get(2);
@@ -123,7 +122,7 @@ public class HomeWork9 extends TestBase {
       }
       List<String> zonesSortedInAscOrder = zoneNames.stream().sorted(Comparator.naturalOrder()).collect(Collectors.toList());
       softAssert.assertThat("Sorting should be in ascending order", Objects.equals(zonesSortedInAscOrder, zoneNames), is(true));
-      driver.navigate().back();
+      app.getDriver().navigate().back();
       zoneNames = new ArrayList<>();
     }
 

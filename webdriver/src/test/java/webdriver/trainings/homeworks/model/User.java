@@ -1,4 +1,4 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,10 @@ public class User {
   private String lastName;
   private String address1;
   private String address2;
-  private int postCode;
+  private String postCode;
   private String city;
+  private String country;
+  private String zone;
   private String email;
   private String phone;
   private String password;
@@ -29,6 +31,8 @@ public class User {
     this.address1 = builder.address1;
     this.address2 = builder.address2;
     this.postCode = builder.postCode;
+    this.country = builder.country;
+    this.zone = builder.zone;
     this.city = builder.city;
     this.email = builder.email;
     this.phone = builder.phone;
@@ -40,8 +44,10 @@ public class User {
     private String lastName = "lastName";
     private String address1 = "address1";
     private String address2 = "address2";
-    private int postCode = 12345;
+    private String postCode = "12345";
     private String city = "city";
+    private String country = "country";
+    private String zone = "zone";
     private String email = "email-" + System.currentTimeMillis() + "@litecart.com";
     private String phone = "phone";
     private String password = "password";
@@ -66,7 +72,7 @@ public class User {
       return this;
     }
 
-    public User.Builder postCode(int postCode) {
+    public User.Builder postCode(String postCode) {
       this.postCode = postCode;
       return this;
     }
@@ -78,6 +84,16 @@ public class User {
 
     public User.Builder email(String email) {
       this.email = email;
+      return this;
+    }
+
+    public User.Builder country(String country) {
+      this.country = country;
+      return this;
+    }
+
+    public User.Builder zone(String zone) {
+      this.zone = zone;
       return this;
     }
 
@@ -113,7 +129,7 @@ public class User {
     return address2;
   }
 
-  public int getPostCode() {
+  public String getPostCode() {
     return postCode;
   }
 
@@ -123,6 +139,14 @@ public class User {
 
   public String getEmail() {
     return email;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public String getZone() {
+    return zone;
   }
 
   public String getPhone() {

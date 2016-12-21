@@ -1,4 +1,4 @@
-package webdriver.trainings.homeworks;
+package webdriver.trainings.homeworks.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,7 +21,7 @@ public class HomeWork10 extends TestBase {
 
     SoftHamcrestAssert softAssert = new SoftHamcrestAssert();
     goTo("http://localhost/litecart-1.3.6");
-    List<WebElement> campaignsProducts = driver.findElements(By.cssSelector("#box-campaigns ul li"));
+    List<WebElement> campaignsProducts = app.getDriver().findElements(By.cssSelector("#box-campaigns ul li"));
     WebElement firstProduct = campaignsProducts.get(0);
 
     String mainPageProductName = firstProduct.findElement(By.cssSelector("div.name")).getText();
@@ -53,31 +53,31 @@ public class HomeWork10 extends TestBase {
 
     firstProduct.click();
 
-    String productPageProductName = driver.findElement(By.cssSelector("#box-product .title")).getText();
-    String productPageRegularPrice = driver.findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getText();
-    String productPageCampaignPrice = driver.findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getText();
+    String productPageProductName = app.getDriver().findElement(By.cssSelector("#box-product .title")).getText();
+    String productPageRegularPrice = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getText();
+    String productPageCampaignPrice = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getText();
 
-    String productPageRegularPriceCssStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getAttribute("class");
-    String productPageCampaignPriceCssStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getAttribute("class");
+    String productPageRegularPriceCssStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getAttribute("class");
+    String productPageCampaignPriceCssStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getAttribute("class");
 
     // Regular price
-    String productPageRegularPriceColorStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getCssValue("color");
+    String productPageRegularPriceColorStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getCssValue("color");
     softAssert.assertThat("Product page product regular price color styles mismatch", productPageRegularPriceColorStyle, is("rgba(102, 102, 102, 1)"));
 
-    String productPageRegularPriceTextDecorationStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getCssValue("text-decoration");
+    String productPageRegularPriceTextDecorationStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getCssValue("text-decoration");
     softAssert.assertThat("Product page product regular price font-weight styles mismatch", productPageRegularPriceTextDecorationStyle, is("line-through"));
 
-    String productPageRegularPriceFontSizeStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getCssValue("font-size");
+    String productPageRegularPriceFontSizeStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .regular-price")).getCssValue("font-size");
     softAssert.assertThat("Product page product regular price font-size style mismatch", productPageRegularPriceFontSizeStyle, is( "16px"));
 
     // Campaign price
-    String productPageCampaignPriceColorStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getCssValue("color");
+    String productPageCampaignPriceColorStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getCssValue("color");
     softAssert.assertThat("Product page product campaign price color styles mismatch", productPageCampaignPriceColorStyle, is("rgba(204, 0, 0, 1)"));
 
-    String productPageCampaignPriceFontWeightStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getCssValue("font-weight");
+    String productPageCampaignPriceFontWeightStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getCssValue("font-weight");
     softAssert.assertThat("Product page product campaign price font-weight styles mismatch", productPageCampaignPriceFontWeightStyle, is("bold"));
 
-    String productPageCampaignPriceFontSizeStyle = driver.findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getCssValue("font-size");
+    String productPageCampaignPriceFontSizeStyle = app.getDriver().findElement(By.cssSelector("#box-product .price-wrapper .campaign-price")).getCssValue("font-size");
     softAssert.assertThat("Product page product campaign price font-size styles mismatch", productPageCampaignPriceFontSizeStyle, is("22px"));
 
 
